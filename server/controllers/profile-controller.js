@@ -7,4 +7,34 @@ module.exports.updatePhoto = function (req, res){
     var userId = req.body.userId;
     
     console.log("User " + userId + " is submitting " , file);
+    var uploadDate = new Date().toISOString;
+   
+    
+    var tempPath = file.path;
+    var targetPath = path.join(__dirname, "../../uploads/" + userId + uploadDate + file.name);
+    var savePath = "/uploads/" + userId + uploadDate + file.name;
+    console.log("testing file"+file);
+    console.log(tempPath);
+    console.log(" khanh break"+targetPath);
+    fs.rename(tempPath, targetPath, function (err){
+        if (err){
+            console.log(err + "khanh erorrrr")
+        } else {
+            console.log('File Moved');
+            User.findById(userId, function(err, userData){
+                var user = userData;
+                user.image = savePath;
+                user.save(function(err){
+                    if (err){
+                        console.log("failed save")
+                        res.json({status: 500})
+                    } else {
+                        console.log("save successful");
+                        
+                        res.json({status: 200})
+                    }
+                })
+            })
+        }
+    })
 }

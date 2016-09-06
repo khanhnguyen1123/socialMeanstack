@@ -15,12 +15,15 @@
  			console.log("Error out");
  		}
 
+ 		if (results.length === 0){
+ 			console.log("nothing found");
+ 		}
  		if (results && results.length === 1){
  			var userData = results[0];
  			res.json({email: req.body.email,
  					  _id: userData._id,
  					   });
- 			//console.log(results);
+ 			console.log(results);
  		}
  	})
  }
