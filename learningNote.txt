@@ -1,0 +1,4 @@
+load up some dependences:  
+sudo npm install express
+npm install express --save
+sudo npm install 
