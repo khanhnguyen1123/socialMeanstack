@@ -27,6 +27,8 @@ app.post('/api/user/login', authenticationController.login);
 
 // profile
 app.post('/api/profile/editPhoto', multipartMiddleware,profileController.updatePhoto);
+app.post('/api/profile/updateUsername',profileController.updateUsername);
+app.post('/api/profile/updateBio',profileController.updateBio);
 
 app.listen('3000', function(){
 	console.log("This is working khanh (local host 3000)");
