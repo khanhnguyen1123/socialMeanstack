@@ -13,7 +13,12 @@
 			}).error(function(error){
 				console.error(error+'khanh erorr');
 			});
-		}
+		};
+
+		$scope.logOut = function(){
+			localStorage.clear();
+			$scope.loggedIn = false;
+		};
 
 	}]);
 
