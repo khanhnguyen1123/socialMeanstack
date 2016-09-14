@@ -33,6 +33,7 @@ app.post('/api/profile/updateBio',profileController.updateBio);
 
 //waste
 app.post('/api/waste/post', wasteController.postWaste);
+app.get('/api/waste/get',wasteController.getWastes);
 
 app.listen('3000', function(){
 	console.log("This is working khanh (local host 3000)");

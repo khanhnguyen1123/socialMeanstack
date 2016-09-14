@@ -18,12 +18,43 @@
                }
                
                $http.post('api/waste/post', request).success(function(response){
-                    console.log(response);
+                    console.log(response+"khanh testing set getwastes to true");
                     $scope.wastes = response;
+                    // khanh adding for refesh the textarea and update the getwastes 
+                    getWastes(true);
+                    $scope.newWaste=null;
                }).error(function(error){
                     console.error(error);
                })
             }
         };
+
+        function getWastes (initial){
+      
+           $http.get('api/waste/get').success(function (response){
+                if (initial){
+                    $scope.wastes = response;
+                } else {
+                    if (response.length> $scope.wastes.length){
+                    $scope.incomingWastes = response;
+                    }
+                }
+           })
+        };
+
+        $interval(function(){
+            getWastes(false);
+            if ($scope.incomingWastes){
+            $scope.difference = $scope.incomingWastes.length - $scope.wastes.length;
+            }
+            console.log("this is working")
+        }, 5000);
+
+        $scope.setNewWastes = function () {
+            $scope.wastes = angular.copy($scope.incomingWastes);
+            $scope.incomingWastes = undefined;
+        }
+        //init
+        getWastes(true);
 		}]);
 }());
