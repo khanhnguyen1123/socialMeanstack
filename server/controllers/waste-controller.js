@@ -16,6 +16,7 @@ module.exports.postWaste= function(req,res){
 
 module.exports.getWastes = function (req, res){
 	console.log(req.body);
+
     if (!req.body.following){
 	Waste.find({})
           .sort({date: -1})

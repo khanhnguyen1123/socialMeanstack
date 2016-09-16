@@ -9,6 +9,7 @@ var app = express();
 var authenticationController = require ('./server/controllers/authentication-controller');
 var profileController = require('./server/controllers/profile-controller');
 var wasteController = require('./server/controllers/waste-controller');
+var usersController = require('./server/controllers/users-controller');
 
 mongoose.connect('mongodb://localhost:27017/time-waste')
 
@@ -33,7 +34,11 @@ app.post('/api/profile/updateBio',profileController.updateBio);
 
 //waste
 app.post('/api/waste/post', wasteController.postWaste);
-app.get('/api/waste/get',wasteController.getWastes);
+app.post('/api/waste/get',wasteController.getWastes);
+
+//user
+app.get('/api/users/get',usersController.getUsers);
+app.post('/api/users/follow',usersController.followUser);
 
 app.listen('3000', function(){
 	console.log("This is working khanh (local host 3000)");
